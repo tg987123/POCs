@@ -4,12 +4,12 @@ import org.bson.types.ObjectId;
 import org.mongodb.morphia.Morphia;
 import org.mongodb.morphia.dao.BasicDAO;
 
-import com.egen.egen_be_challenge.entities.Metrics;
+import com.egen.egen_be_challenge.entities.Alerts;
 import com.mongodb.MongoClient;
 
-public class MetricsDAO extends BasicDAO<Metrics, ObjectId>{
+public class AlertsDAOImpl extends BasicDAO<Alerts, ObjectId>{
 
-	public MetricsDAO(MongoClient mongoClient, Morphia morphia, String dbName) {
+	public AlertsDAOImpl(MongoClient mongoClient, Morphia morphia, String dbName) {
 		super(mongoClient, morphia, dbName);
 	}
 

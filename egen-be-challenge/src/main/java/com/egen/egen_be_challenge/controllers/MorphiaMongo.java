@@ -6,8 +6,8 @@ import java.util.List;
 import org.mongodb.morphia.Morphia;
 import org.mongodb.morphia.query.Query;
 
-import com.egen.egen_be_challenge.dao.AlertsDAO;
-import com.egen.egen_be_challenge.dao.MetricsDAO;
+import com.egen.egen_be_challenge.dao.AlertsDAOImpl;
+import com.egen.egen_be_challenge.dao.MetricsDAOImpl;
 import com.egen.egen_be_challenge.entities.Alerts;
 import com.egen.egen_be_challenge.entities.Metrics;
 import com.mongodb.MongoClient;
@@ -18,43 +18,43 @@ public class MorphiaMongo {
 
 	public void insertAlert(long timestamp, String alert) {
 		establishClient();
-		AlertsDAO alertsDAO = new AlertsDAO(mongoClient, getMorphia(), "egen-challenge");
+		AlertsDAOImpl alertsDAO = new AlertsDAOImpl(mongoClient, getMorphia(), "egen-challenge");
 		alertsDAO.save(new Alerts(timestamp, alert));
 	}
 
 	public void insertMetrics(long timestamp, int weight) {
 		establishClient();
-		MetricsDAO metricsDAO = new MetricsDAO(mongoClient, getMorphia(), "egen-challenge");
-		metricsDAO.save(new Metrics(timestamp, weight));
+		MetricsDAOImpl metricsDAOImpl = new MetricsDAOImpl(mongoClient, getMorphia(), "egen-challenge");
+		metricsDAOImpl.save(new Metrics(timestamp, weight));
 	}
 
 	public List<Alerts> readAlerts() {
 		establishClient();
-		AlertsDAO alertsDAO = new AlertsDAO(mongoClient, getMorphia(), "egen-challenge");
-		return alertsDAO.find().asList();
+		AlertsDAOImpl alertsDAOImpl = new AlertsDAOImpl(mongoClient, getMorphia(), "egen-challenge");
+		return alertsDAOImpl.find().asList();
 	}
 
 	public List<Alerts> readAlerts(long startTimestamp, long endTimestamp) {
 		establishClient();
-		AlertsDAO alertsDAO = new AlertsDAO(mongoClient, getMorphia(), "egen-challenge");
+		AlertsDAOImpl alertsDAOImpl = new AlertsDAOImpl(mongoClient, getMorphia(), "egen-challenge");
 		Query<Alerts> query = getMorphia().createDatastore(mongoClient, "egen-challenge").createQuery(Alerts.class)
 				.filter("timestamp >", startTimestamp).filter("timestamp <", endTimestamp);
-		return alertsDAO.find(query).asList();
+		return alertsDAOImpl.find(query).asList();
 	}
 
 	public List<Metrics> readMetrics() {
 		establishClient();
-		MetricsDAO metricsDAO = new MetricsDAO(mongoClient, getMorphia(), "egen-challenge");
+		MetricsDAOImpl metricsDAO = new MetricsDAOImpl(mongoClient, getMorphia(), "egen-challenge");
 		return metricsDAO.find().asList();
 	}
 
 	public List<Metrics> readMetrics(long startTimestamp, long endTimestamp) {
 		establishClient();
-		MetricsDAO metricsDAO = new MetricsDAO(mongoClient, getMorphia(), "egen-challenge");
+		MetricsDAOImpl metricsDAOImpl = new MetricsDAOImpl(mongoClient, getMorphia(), "egen-challenge");
 		Query<Metrics> query = getMorphia().createDatastore(mongoClient, "egen-challenge").createQuery(Metrics.class)
 				.filter("timestamp >", startTimestamp).filter("timestamp <", endTimestamp);
 
-		return metricsDAO.find(query).asList();
+		return metricsDAOImpl.find(query).asList();
 	}
 
 	private Morphia getMorphia() {
