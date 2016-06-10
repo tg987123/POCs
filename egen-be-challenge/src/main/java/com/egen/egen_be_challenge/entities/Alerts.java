@@ -1,6 +1,5 @@
 package com.egen.egen_be_challenge.entities;
 
-import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
 
@@ -8,7 +7,7 @@ import org.mongodb.morphia.annotations.Id;
 public class Alerts {
 
 	@Id
-	private ObjectId id;
+	private String id;
 
 	private long timeStamp;
 
@@ -22,11 +21,11 @@ public class Alerts {
 		this.alert = alert;
 	}
 
-	public ObjectId getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(ObjectId id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -44,17 +43,5 @@ public class Alerts {
 
 	public void setAlert(String alert) {
 		this.alert = alert;
-	}
-
-	@Override
-	public String toString() {
-		StringBuilder string = new StringBuilder();
-		string.append('{');
-		string.append("\n");
-		string.append("\t").append("id:").append(this.id).append("\n");
-		string.append("\t").append("timeStamp:").append(this.timeStamp).append("\n");
-		string.append("\t").append("alert:").append(this.alert).append("\n");
-		string.append('}');
-		return string.toString();
 	}
 }

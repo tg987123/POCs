@@ -4,16 +4,16 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import com.egen.egen_be_challenge.controllers.MorphiaMongo;
 import com.egen.egen_be_challenge.entities.Alerts;
 import com.egen.egen_be_challenge.entities.Metrics;
+import com.egen.egen_be_challenge.utilities.MorphiaMongo;
 
 public class MongoMorphiaTest {
 	
 	@Test
     public void insertAlertTest() {
 		MorphiaMongo morphiaMongo = new MorphiaMongo();
-		morphiaMongo.insertAlert(System.currentTimeMillis(), "This is a alert");
+		morphiaMongo.insertAlert(System.currentTimeMillis(), "This is a alert4");
 		assertTrue(true);
 	}
 	

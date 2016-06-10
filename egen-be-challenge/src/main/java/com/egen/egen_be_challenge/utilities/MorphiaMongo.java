@@ -1,4 +1,4 @@
-package com.egen.egen_be_challenge.controllers;
+package com.egen.egen_be_challenge.utilities;
 
 import java.net.UnknownHostException;
 import java.util.List;
@@ -18,8 +18,8 @@ public class MorphiaMongo {
 
 	public void insertAlert(long timeStamp, String alert) {
 		establishClient();
-		AlertsDAOImpl alertsDAO = new AlertsDAOImpl(mongoClient, getMorphia(), "egen-challenge");
-		alertsDAO.save(new Alerts(timeStamp, alert));
+		AlertsDAOImpl alertsDAOImpl = new AlertsDAOImpl(mongoClient, getMorphia(), "egen-challenge");
+		alertsDAOImpl.save(new Alerts(timeStamp, alert));
 	}
 
 	public void insertMetrics(long timeStamp, int value) {
@@ -44,8 +44,8 @@ public class MorphiaMongo {
 
 	public List<Metrics> readMetrics() {
 		establishClient();
-		MetricsDAOImpl metricsDAO = new MetricsDAOImpl(mongoClient, getMorphia(), "egen-challenge");
-		return metricsDAO.find().asList();
+		MetricsDAOImpl metricsDAOImpl = new MetricsDAOImpl(mongoClient, getMorphia(), "egen-challenge");
+		return metricsDAOImpl.find().asList();
 	}
 
 	public List<Metrics> readMetrics(long startTimeStamp, long endTimeStamp) {

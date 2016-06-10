@@ -1,10 +1,10 @@
-package com.egen.egen_be_challenge.controllers;
+package com.egen.egen_be_challenge.utilities;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import java.io.Serializable;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
-public class Sensor {
+public class Sensor implements Serializable{
 	
+	private static final long serialVersionUID = -32715445682403486L;
 	private long timeStamp;
 	private int value;
 	
