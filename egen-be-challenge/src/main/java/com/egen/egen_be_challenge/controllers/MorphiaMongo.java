@@ -6,8 +6,8 @@ import java.util.List;
 import org.mongodb.morphia.Morphia;
 import org.mongodb.morphia.query.Query;
 
-import com.egen.egen_be_challenge.dao.AlertsDAOImpl;
-import com.egen.egen_be_challenge.dao.MetricsDAOImpl;
+import com.egen.egen_be_challenge.daoimpl.AlertsDAOImpl;
+import com.egen.egen_be_challenge.daoimpl.MetricsDAOImpl;
 import com.egen.egen_be_challenge.entities.Alerts;
 import com.egen.egen_be_challenge.entities.Metrics;
 import com.mongodb.MongoClient;
@@ -34,11 +34,11 @@ public class MorphiaMongo {
 		return alertsDAOImpl.find().asList();
 	}
 
-	public List<Alerts> readAlerts(long startTimestamp, long endTimestamp) {
+	public List<Alerts> readAlerts(long startTimeStamp, long endTimeStamp) {
 		establishClient();
 		AlertsDAOImpl alertsDAOImpl = new AlertsDAOImpl(mongoClient, getMorphia(), "egen-challenge");
 		Query<Alerts> query = getMorphia().createDatastore(mongoClient, "egen-challenge").createQuery(Alerts.class)
-				.filter("timeStamp >", startTimestamp).filter("timeStamp <", endTimestamp);
+				.filter("timeStamp >", startTimeStamp).filter("timeStamp <", endTimeStamp);
 		return alertsDAOImpl.find(query).asList();
 	}
 
@@ -48,11 +48,11 @@ public class MorphiaMongo {
 		return metricsDAO.find().asList();
 	}
 
-	public List<Metrics> readMetrics(long startTimestamp, long endTimestamp) {
+	public List<Metrics> readMetrics(long startTimeStamp, long endTimeStamp) {
 		establishClient();
 		MetricsDAOImpl metricsDAOImpl = new MetricsDAOImpl(mongoClient, getMorphia(), "egen-challenge");
 		Query<Metrics> query = getMorphia().createDatastore(mongoClient, "egen-challenge").createQuery(Metrics.class)
-				.filter("timeStamp >", startTimestamp).filter("timeStamp <", endTimestamp);
+				.filter("timeStamp >", startTimeStamp).filter("timeStamp <", endTimeStamp);
 
 		return metricsDAOImpl.find(query).asList();
 	}

@@ -1,4 +1,4 @@
-package com.egen.egen_be_challenge.dao;
+package com.egen.egen_be_challenge.daoimpl;
 
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.Morphia;
