@@ -5,25 +5,30 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Sensor {
 	
-	private long timestamp;
-	private int weight;
-	public long getTimestamp() {
-		return timestamp;
+	private long timeStamp;
+	private int value;
+	
+	public long getTimeStamp() {
+		return timeStamp;
 	}
-	public void setTimestamp(long timestamp) {
-		this.timestamp = timestamp;
+
+	public void setTimeStamp(long timeStamp) {
+		this.timeStamp = timeStamp;
 	}
-	public int getWeight() {
-		return weight;
+
+	public int getValue() {
+		return value;
 	}
-	public void setWeight(int weight) {
-		this.weight = weight;
+
+	public void setValue(int value) {
+		this.value = value;
 	}
+
 	@Override
     public String toString() {
         return "Sensor{" +
-                "timestamp='" + timestamp + '\'' +
-                ", weight=" + weight +
+                "timeStamp='" + timeStamp + '\'' +
+                ", value=" + value +
                 '}';
     }
 }

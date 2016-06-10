@@ -16,16 +16,16 @@ public class MorphiaMongo {
 
 	private MongoClient mongoClient = null;
 
-	public void insertAlert(long timestamp, String alert) {
+	public void insertAlert(long timeStamp, String alert) {
 		establishClient();
 		AlertsDAOImpl alertsDAO = new AlertsDAOImpl(mongoClient, getMorphia(), "egen-challenge");
-		alertsDAO.save(new Alerts(timestamp, alert));
+		alertsDAO.save(new Alerts(timeStamp, alert));
 	}
 
-	public void insertMetrics(long timestamp, int weight) {
+	public void insertMetrics(long timeStamp, int value) {
 		establishClient();
 		MetricsDAOImpl metricsDAOImpl = new MetricsDAOImpl(mongoClient, getMorphia(), "egen-challenge");
-		metricsDAOImpl.save(new Metrics(timestamp, weight));
+		metricsDAOImpl.save(new Metrics(timeStamp, value));
 	}
 
 	public List<Alerts> readAlerts() {
@@ -38,7 +38,7 @@ public class MorphiaMongo {
 		establishClient();
 		AlertsDAOImpl alertsDAOImpl = new AlertsDAOImpl(mongoClient, getMorphia(), "egen-challenge");
 		Query<Alerts> query = getMorphia().createDatastore(mongoClient, "egen-challenge").createQuery(Alerts.class)
-				.filter("timestamp >", startTimestamp).filter("timestamp <", endTimestamp);
+				.filter("timeStamp >", startTimestamp).filter("timeStamp <", endTimestamp);
 		return alertsDAOImpl.find(query).asList();
 	}
 
@@ -52,7 +52,7 @@ public class MorphiaMongo {
 		establishClient();
 		MetricsDAOImpl metricsDAOImpl = new MetricsDAOImpl(mongoClient, getMorphia(), "egen-challenge");
 		Query<Metrics> query = getMorphia().createDatastore(mongoClient, "egen-challenge").createQuery(Metrics.class)
-				.filter("timestamp >", startTimestamp).filter("timestamp <", endTimestamp);
+				.filter("timeStamp >", startTimestamp).filter("timeStamp <", endTimestamp);
 
 		return metricsDAOImpl.find(query).asList();
 	}

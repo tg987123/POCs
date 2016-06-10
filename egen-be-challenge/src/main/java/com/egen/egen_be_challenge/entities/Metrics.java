@@ -10,16 +10,16 @@ public class Metrics {
 	@Id
 	private ObjectId id;
 
-	private long timestamp;
+	private long timeStamp;
 
-	private int weight;
+	private int value;
 
 	public Metrics() {
 	}
 
-	public Metrics(long timestamp, int weight) {
-		this.timestamp = timestamp;
-		this.weight = weight;
+	public Metrics(long timeStamp, int value) {
+		this.timeStamp = timeStamp;
+		this.value = value;
 	}
 
 	public ObjectId getId() {
@@ -29,31 +29,31 @@ public class Metrics {
 	public void setId(ObjectId id) {
 		this.id = id;
 	}
-
-	public long getTimestamp() {
-		return timestamp;
-	}
-
-	public void setTimestamp(long timestamp) {
-		this.timestamp = timestamp;
-	}
-
-	public int getWeight() {
-		return weight;
-	}
-
-	public void setWeight(int weight) {
-		this.weight = weight;
-	}
 	
+	public long getTimeStamp() {
+		return timeStamp;
+	}
+
+	public void setTimeStamp(long timeStamp) {
+		this.timeStamp = timeStamp;
+	}
+
+	public int getValue() {
+		return value;
+	}
+
+	public void setValue(int value) {
+		this.value = value;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder string = new StringBuilder();
 		string.append('{');
 		string.append("\n");
 		string.append("\t").append("id:").append(this.id).append("\n");
-		string.append("\t").append("timestamp:").append(this.timestamp).append("\n");
-		string.append("\t").append("weight:").append(this.weight).append("\n");
+		string.append("\t").append("timeStamp:").append(this.timeStamp).append("\n");
+		string.append("\t").append("value:").append(this.value).append("\n");
 		string.append('}');
 		return string.toString();
 	}

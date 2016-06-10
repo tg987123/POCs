@@ -10,15 +10,15 @@ public class Alerts {
 	@Id
 	private ObjectId id;
 
-	private long timestamp;
+	private long timeStamp;
 
 	private String alert;
 
 	public Alerts() {
 	}
 
-	public Alerts(long timestamp, String alert) {
-		this.timestamp = timestamp;
+	public Alerts(long timeStamp, String alert) {
+		this.timeStamp = timeStamp;
 		this.alert = alert;
 	}
 
@@ -30,12 +30,12 @@ public class Alerts {
 		this.id = id;
 	}
 
-	public long getTimestamp() {
-		return timestamp;
+	public long getTimeStamp() {
+		return timeStamp;
 	}
 
-	public void setTimestamp(long timestamp) {
-		this.timestamp = timestamp;
+	public void setTimeStamp(long timeStamp) {
+		this.timeStamp = timeStamp;
 	}
 
 	public String getAlert() {
@@ -52,7 +52,7 @@ public class Alerts {
 		string.append('{');
 		string.append("\n");
 		string.append("\t").append("id:").append(this.id).append("\n");
-		string.append("\t").append("timestamp:").append(this.timestamp).append("\n");
+		string.append("\t").append("timeStamp:").append(this.timeStamp).append("\n");
 		string.append("\t").append("alert:").append(this.alert).append("\n");
 		string.append('}');
 		return string.toString();
