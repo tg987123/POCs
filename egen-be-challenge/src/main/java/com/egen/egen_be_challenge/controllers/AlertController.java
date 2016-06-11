@@ -2,6 +2,7 @@ package com.egen.egen_be_challenge.controllers;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -13,6 +14,9 @@ import com.egen.egen_be_challenge.utilities.MorphiaMongo;
 @RestController
 @RequestMapping("/alert")
 public class AlertController {
+	
+	private static Logger LOGGER = Logger.getLogger(AlertController.class);
+	
 	@RequestMapping(method = RequestMethod.GET, value = "/read", produces = "application/json")
 	public List<Alerts> read() {
 		MorphiaMongo morphiaMongo = new MorphiaMongo();
@@ -20,7 +24,9 @@ public class AlertController {
 		try{
 			alerts = morphiaMongo.readAlerts();
 		}catch(Exception exception){
-			// morphiaMongo.closeMongoClient();
+			LOGGER.error(exception.getMessage());
+		}finally{
+			morphiaMongo.closeMongoClient();
 		}
 		return alerts;
 	}
@@ -32,9 +38,10 @@ public class AlertController {
 		try{
 			alerts = morphiaMongo.readAlerts(startTimeStamp, endTimeStamp);
 		}catch(Exception exception){
-			// morphiaMongo.closeMongoClient();
+			LOGGER.error(exception.getMessage());
+		}finally{
+			morphiaMongo.closeMongoClient();
 		}
-		// morphiaMongo.closeMongoClient();
 		return alerts;
 	}
 }

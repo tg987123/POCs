@@ -2,6 +2,7 @@ package com.egen.egen_be_challenge.controllers;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.easyrules.api.RulesEngine;
 import org.easyrules.core.RulesEngineBuilder;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,15 +20,22 @@ import com.egen.egen_be_challenge.utilities.Sensor;
 @RestController
 @RequestMapping("/metric")
 public class MetricController {
+	private static Logger LOGGER = Logger.getLogger(MetricController.class);
+
 	@RequestMapping(method = RequestMethod.POST, value = "/create", produces = "application/json")
 	public void create(@RequestBody final Sensor sensor) {
 		MorphiaMongo morphiaMongo = new MorphiaMongo();
-		morphiaMongo.createMetrics(sensor.getTimeStamp(), sensor.getValue());
-		RulesEngine rulesEngine = RulesEngineBuilder.aNewRulesEngine().withSkipOnFirstAppliedRule(true).build();
-		rulesEngine.registerRule(new EasyRule1(new MorphiaMongo().getBaseValue(), sensor));
-		rulesEngine.registerRule(new EasyRule2(new MorphiaMongo().getBaseValue(), sensor));
-		rulesEngine.fireRules();
-		// morphiaMongo.closeMongoClient();
+		try {
+			morphiaMongo.createMetrics(sensor.getTimeStamp(), sensor.getValue());
+			RulesEngine rulesEngine = RulesEngineBuilder.aNewRulesEngine().withSkipOnFirstAppliedRule(true).build();
+			rulesEngine.registerRule(new EasyRule1(new MorphiaMongo().getBaseValue(), sensor));
+			rulesEngine.registerRule(new EasyRule2(new MorphiaMongo().getBaseValue(), sensor));
+			rulesEngine.fireRules();
+		} catch (Exception exception) {
+			LOGGER.error(exception.getMessage());
+		} finally {
+			morphiaMongo.closeMongoClient();
+		}
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "/read", produces = "application/json")
@@ -37,7 +45,9 @@ public class MetricController {
 		try {
 			metrics = morphiaMongo.readMetrics();
 		} catch (Exception exception) {
-			// morphiaMongo.closeMongoClient();
+			LOGGER.error(exception.getMessage());
+		} finally {
+			morphiaMongo.closeMongoClient();
 		}
 		return metrics;
 	}
@@ -49,7 +59,9 @@ public class MetricController {
 		try {
 			metrics = morphiaMongo.readMetrics(startTimeStamp, endTimeStamp);
 		} catch (Exception exception) {
-			// morphiaMongo.closeMongoClient();
+			LOGGER.error(exception.getMessage());
+		} finally {
+			morphiaMongo.closeMongoClient();
 		}
 		return metrics;
 	}
