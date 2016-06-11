@@ -1,4 +1,4 @@
-package com.egen.egen_be_easyrules;
+package com.egen.egen_be_challenge.easyrules;
 
 import org.easyrules.annotation.Action;
 import org.easyrules.annotation.Condition;
