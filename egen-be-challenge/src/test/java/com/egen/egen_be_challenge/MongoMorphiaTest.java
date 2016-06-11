@@ -13,14 +13,14 @@ public class MongoMorphiaTest {
 	@Test
     public void insertAlertTest() {
 		MorphiaMongo morphiaMongo = new MorphiaMongo();
-		morphiaMongo.insertAlert(System.currentTimeMillis(), "This is a alert4");
+		morphiaMongo.createAlert(System.currentTimeMillis(), "This is a alert4");
 		assertTrue(true);
 	}
 	
 	@Test
     public void insertMetricsTest() {
 		MorphiaMongo morphiaMongo = new MorphiaMongo();
-		morphiaMongo.insertMetrics(System.currentTimeMillis(), 235);
+		morphiaMongo.createMetrics(System.currentTimeMillis(), 235);
 		assertTrue(true);
 	}
 	
