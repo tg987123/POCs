@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.egen.egen_be_challenge.entities.Metrics;
-import com.egen.egen_be_challenge.utilities.EasyRule1;
-import com.egen.egen_be_challenge.utilities.EasyRule2;
 import com.egen.egen_be_challenge.utilities.MorphiaMongo;
 import com.egen.egen_be_challenge.utilities.Sensor;
+import com.egen.egen_be_easyrules.EasyRule1;
+import com.egen.egen_be_easyrules.EasyRule2;
 
 @RestController
 @RequestMapping("/metric")

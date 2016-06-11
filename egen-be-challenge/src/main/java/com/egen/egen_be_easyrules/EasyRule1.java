@@ -1,8 +1,11 @@
-package com.egen.egen_be_challenge.utilities;
+package com.egen.egen_be_easyrules;
 
 import org.easyrules.annotation.Action;
 import org.easyrules.annotation.Condition;
 import org.easyrules.annotation.Rule;
+
+import com.egen.egen_be_challenge.utilities.MorphiaMongo;
+import com.egen.egen_be_challenge.utilities.Sensor;
 
 @Rule(name = "Lower Bound Rule", description = "This rule will save alert if the person weight shoots by 10% of base weight.")
 public class EasyRule1 {
