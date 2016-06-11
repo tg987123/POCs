@@ -13,13 +13,28 @@ import com.egen.egen_be_challenge.utilities.MorphiaMongo;
 @RestController
 @RequestMapping("/alert")
 public class AlertController {
-	@RequestMapping(method = RequestMethod.GET, value = "/read", produces="application/json")
+	@RequestMapping(method = RequestMethod.GET, value = "/read", produces = "application/json")
 	public List<Alerts> read() {
-		return new MorphiaMongo().readAlerts();
+		MorphiaMongo morphiaMongo = new MorphiaMongo();
+		List<Alerts> alerts = null;
+		try{
+			alerts = morphiaMongo.readAlerts();
+		}catch(Exception exception){
+			// morphiaMongo.closeMongoClient();
+		}
+		return alerts;
 	}
 
-	@RequestMapping(method = RequestMethod.GET, value = "/readByTimeRange/{startTimeStamp}/{endTimeStamp}", produces="application/json")
-	public Object read(@PathVariable long startTimeStamp, @PathVariable long endTimeStamp) {
-		return new MorphiaMongo().readAlerts(startTimeStamp, endTimeStamp);
+	@RequestMapping(method = RequestMethod.GET, value = "/readByTimeRange/{startTimeStamp}/{endTimeStamp}", produces = "application/json")
+	public List<Alerts> read(@PathVariable long startTimeStamp, @PathVariable long endTimeStamp) {
+		MorphiaMongo morphiaMongo = new MorphiaMongo();
+		List<Alerts> alerts = null;
+		try{
+			alerts = morphiaMongo.readAlerts(startTimeStamp, endTimeStamp);
+		}catch(Exception exception){
+			// morphiaMongo.closeMongoClient();
+		}
+		// morphiaMongo.closeMongoClient();
+		return alerts;
 	}
 }

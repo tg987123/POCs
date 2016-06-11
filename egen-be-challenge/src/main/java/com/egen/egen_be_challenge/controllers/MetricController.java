@@ -19,24 +19,38 @@ import com.egen.egen_be_challenge.utilities.Sensor;
 @RestController
 @RequestMapping("/metric")
 public class MetricController {
-	@RequestMapping(method = RequestMethod.POST, value = "/create", produces="application/json")
-    public void create(@RequestBody final Sensor sensor) {
+	@RequestMapping(method = RequestMethod.POST, value = "/create", produces = "application/json")
+	public void create(@RequestBody final Sensor sensor) {
 		MorphiaMongo morphiaMongo = new MorphiaMongo();
 		morphiaMongo.createMetrics(sensor.getTimeStamp(), sensor.getValue());
 		RulesEngine rulesEngine = RulesEngineBuilder.aNewRulesEngine().withSkipOnFirstAppliedRule(true).build();
 		rulesEngine.registerRule(new EasyRule1(new MorphiaMongo().getBaseValue(), sensor));
 		rulesEngine.registerRule(new EasyRule2(new MorphiaMongo().getBaseValue(), sensor));
 		rulesEngine.fireRules();
-		//morphiaMongo.closeMongoClient();
-    }
-	
-	@RequestMapping(method = RequestMethod.GET, value = "/read", produces="application/json")
+		// morphiaMongo.closeMongoClient();
+	}
+
+	@RequestMapping(method = RequestMethod.GET, value = "/read", produces = "application/json")
 	public List<Metrics> read() {
-		return new MorphiaMongo().readMetrics();
-    }
-	
-	@RequestMapping(method = RequestMethod.GET, value = "/readByTimeRange/{startTimeStamp}/{endTimeStamp}", produces="application/json")
-    public List<Metrics> read(@PathVariable long startTimeStamp, @PathVariable long endTimeStamp) {
-        return new MorphiaMongo().readMetrics(startTimeStamp, endTimeStamp);
-    }
+		MorphiaMongo morphiaMongo = new MorphiaMongo();
+		List<Metrics> metrics = null;
+		try {
+			metrics = morphiaMongo.readMetrics();
+		} catch (Exception exception) {
+			// morphiaMongo.closeMongoClient();
+		}
+		return metrics;
+	}
+
+	@RequestMapping(method = RequestMethod.GET, value = "/readByTimeRange/{startTimeStamp}/{endTimeStamp}", produces = "application/json")
+	public List<Metrics> read(@PathVariable long startTimeStamp, @PathVariable long endTimeStamp) {
+		MorphiaMongo morphiaMongo = new MorphiaMongo();
+		List<Metrics> metrics = null;
+		try {
+			metrics = morphiaMongo.readMetrics(startTimeStamp, endTimeStamp);
+		} catch (Exception exception) {
+			// morphiaMongo.closeMongoClient();
+		}
+		return metrics;
+	}
 }
