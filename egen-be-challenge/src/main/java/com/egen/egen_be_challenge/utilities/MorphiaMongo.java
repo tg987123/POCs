@@ -90,7 +90,7 @@ public class MorphiaMongo {
 		}
 	}
 	public  void closeMongoClient(){
-		if (null == mongoClient) {
+		if (null != mongoClient) {
 			mongoClient.close();
 		}
 	}
